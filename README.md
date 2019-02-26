@@ -24,3 +24,13 @@ That object is stored as a hash within an array in the YAML file.
 
 ## 2/25/19
 Build out base Sinatra framework and view templates. Choose fonts. Style buttons. Realized flight number could contain a letter so switched it from a number field to a text input. Create view template for displaying table of flights.
+
+## 2/26/19
+Added add and delete flight functionality, complete with success messages. Opted to simply store flight details within the session, not in a YAML file.
+Data structure is a hash of hashes. Each flight has its own identifier as Key then the value is all of the flight information.
+
+## Further exploration
+In order to allow the user to sort the view, I would need to:
+* add sorting buttons for each filter criteria (airline, departure time, destination)
+* add routes that correspond to each of those buttons (I believe they could be `get` routes)
+* add methods to `sort_by` each criteria - specifically airline, departure, time. 
