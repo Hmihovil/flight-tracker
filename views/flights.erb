@@ -1,0 +1,20 @@
+<table>
+  <tr>
+    <th>Airline</th>
+    <th>Flight Number</th>
+    <th>Destination</th>
+    <th>Departure Time</th>
+  </tr>
+  <tr>
+    <% @flights.each do %>
+      <td><%= @flights[:airline] %></td>
+      <td><%= @flights[:flight_number] %></td>
+      <td><%= @flights[:destination] %></td>
+      <td><%= @flights[:time] %></td>
+    <% end %>
+    <td><a href='/delete'><button type='button' class='delete' name='delete'>Delete</button></a></td>
+  </tr>
+</table>
+<p>
+  <a href='/new'><button type='button' class='new' name='button'>Add a Flight</button></a>
+</p>

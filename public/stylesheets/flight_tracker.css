@@ -1,0 +1,44 @@
+/* font-family: 'ZCOOL QingKe HuangYou', cursive;
+font-family: 'Cantarell', sans-serif; */
+
+body {
+  font-family: sans-serif;
+  font-size: 16px;
+  font-family: 'Cantarell', sans-serif;
+}
+
+.inline {
+  display: inline;
+}
+
+.italic {
+  font-style: italic;
+  font-size: 80%;
+}
+
+.title,
+table th {
+  font-family: 'ZCOOL QingKe HuangYou';
+  font-weight: bold;
+  font-size: 125%;
+}
+
+.new {
+  line-height: 3;
+  background-color: rgb(19, 134, 149);
+}
+
+.cancel {
+  line-height: 3;
+  background-color: rgb(226, 210, 9);
+}
+
+.delete {
+  background-color: rgba(247, 15, 0, 0.9);
+}
+
+button {
+  border-radius: 10px;
+  font-family: 'Cantareell', sans-serif;
+  color: rgb(255, 255, 255);
+}
