@@ -8,5 +8,11 @@
   </head>
   <body>
     <%== yield %>
+
+    <% if session[:message] %>
+      <div class="message">
+        <p><%= session.delete(:message) %></p>
+      </div>
+    <% end %>
   </body>
 </html>

@@ -1,7 +1,6 @@
 require 'sinatra'
 require 'sinatra/reloader'
 require 'tilt/erubis'
-require 'yaml'
 
 configure do
   enable :sessions
@@ -10,24 +9,30 @@ configure do
 end
 
 before do
-  # load path to YAML file
+  session[:flights] ||= {}
+  @flights = session[:flights]
 end
 
-def flights_path
-  File.expand_path('../data/flights.yml', __FILE__)
+def new_max
+  max = @flights.keys.max
+  max = max.nil? ? 1 : max.succ
 end
 
-def load_flights
-  # Psych.dump(flights_path)
-  Psych.load_file(flights_path)
+def add_flight!(airline, flight, destination, time)
+  @flights[new_max] = { airline: "#{airline}",
+                        flight: "#{flight}",
+                        destination: "#{destination}",
+                        time: "#{time}"
+                      }
 end
 
-def add_flight
-  # write flight to YAML file
-end
-
-def delete_flight
-  # remove specified entry from YAML file
+def delete_flight!(id)
+  @flights.delete(id)
+  if @flights[id]
+    session[:message] = 'Flight NOT deleted.'
+  else
+    session[:message] = 'Flight successfully deleted.'
+  end
 end
 
 def proper_case!(name)
@@ -35,18 +40,34 @@ def proper_case!(name)
 end
 
 get '/' do
-  erb :home
+  erb :flights
 end
 
 get '/new' do
   erb :new
 end
 
+get '/flights' do
+  redirect '/'
+end
+
 post '/flights' do
   airline = proper_case!(params[:airline])
-  flight_number = params[:flight_number]
+  flight = params[:flight_number]
   destination = proper_case!(params[:destination])
-  time = "#{params[:hour]}: #{params[:minute]}"
-  @flights = load_flights
-  erb :flights
+  time = "#{params[:hour]}:#{params[:minute]}"
+  add_flight!(airline, flight, destination, time)
+  session[:message] = 'Flight successfully added.'
+  redirect '/'
+end
+
+post '/delete/:id' do
+  id = params[:id].to_i
+  if id.nil?
+    session[:message] = "That flight doesn't exist."
+    erb :flights
+  else
+    delete_flight!(id)
+    redirect '/'
+  end
 end

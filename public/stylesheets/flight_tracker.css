@@ -23,6 +23,11 @@ table th {
   font-size: 125%;
 }
 
+.message p {
+  color: rgb(71, 100, 205);
+  font-style: italic;
+}
+
 .new {
   line-height: 3;
   background-color: rgb(19, 134, 149);
